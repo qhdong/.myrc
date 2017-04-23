@@ -44,6 +44,7 @@ set incsearch
 set cc=80
 set clipboard=unnamed
 set clipboard=unnamedplus
+set cursorline
 
 "==============================================================================
 " Cscope Config
