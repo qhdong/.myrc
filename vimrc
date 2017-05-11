@@ -12,7 +12,10 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-surround'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'nginx/nginx'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -45,6 +48,7 @@ set cc=80
 set clipboard=unnamed
 set clipboard=unnamedplus
 set cursorline
+set encoding=utf-8
 
 "==============================================================================
 " Cscope Config
@@ -156,10 +160,13 @@ nmap <leader>w :w!<cr>
 
 command W w !sudo tee % > /dev/null
 
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" Split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-L> <C-W><C-L>
+set splitbelow
+set splitright
 
 " Make VIM remember position in file after reopen
 if has("autocmd")
@@ -168,10 +175,20 @@ endif
 
 " Show the full path to the status line
 set laststatus=2
-set statusline=%<%F\ %h%m%r%y%=%-14.(%l,%c%V%)\ %P
+" set statusline=%<%F\ %h%m%r%y%=%-14.(%l,%c%V%)\ %P
 
 " Toggle pase mode
 set pastetoggle=<F9>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
+"==============================================================================
+" Python
+"==============================================================================
+au BufNewFile,BufRead *.py set textwidth=79
 
 "==============================================================================
 " Ctrl P                            
@@ -188,3 +205,21 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 " let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+"==============================================================================
+" Nerd Tree
+"==============================================================================
+map <C-n> :NERDTreeToggle<CR>
+
+" ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$']
+
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"==============================================================================
+" Vim Airline
+"==============================================================================
+" Enable air tabline
+let g:airline#extensions#tabline#enabled = 1
+
