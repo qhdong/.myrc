@@ -15,6 +15,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mattn/emmet-vim'
+Plugin 'pangloss/vim-javascript'
 
 
 call vundle#end()            " required
@@ -56,7 +59,7 @@ set encoding=utf-8
 set tags=./tags;/
 
 if has("cscope")
-    set csprg=/usr/bin/cscope
+    set csprg=/usr/local/bin/cscope
     set csto=0
     set cst
     set nocsverb
@@ -185,6 +188,10 @@ set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
 
+" Set tabstop to 2 for web programming
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.xml set tabstop=2 shiftwidth=2  
+
+
 "==============================================================================
 " Python
 "==============================================================================
@@ -222,4 +229,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "==============================================================================
 " Enable air tabline
 let g:airline#extensions#tabline#enabled = 1
+
+"==============================================================================
+" Emmet 
+"==============================================================================
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+"==============================================================================
+" vim-javascript 
+"==============================================================================
+let g:javascript_plugin_jsdoc = 1
 
