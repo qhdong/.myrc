@@ -59,7 +59,11 @@ set encoding=utf-8
 set tags=./tags;/
 
 if has("cscope")
-    set csprg=/usr/local/bin/cscope
+    if has("unix")
+        set csprg=/usr/bin/cscope
+    elseif has("macunix")
+        set csprg=/usr/local/bin/cscope
+    endif
     set csto=0
     set cst
     set nocsverb
@@ -191,6 +195,13 @@ nnoremap <space> za
 " Set tabstop to 2 for web programming
 autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.xml set tabstop=2 shiftwidth=2  
 
+" Auto clear last search highlight, just hit <ENTER> key
+nnoremap <CR> :noh<CR><CR>
+
+" Make switch between buffers easier
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
+nnoremap <leader>d :bd<CR>
 
 "==============================================================================
 " Python
